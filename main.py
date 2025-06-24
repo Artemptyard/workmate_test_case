@@ -1,7 +1,7 @@
 import argparse
 from typing import Dict, Tuple, Any, Iterator
 
-from myapi.iofunctions import get_list_from_csv, print_table
+from myapi.iofunctions import get_dict_from_csv, print_table
 from myapi.handlers import handle_filter, handle_order, handle_aggregate
 
 
@@ -17,7 +17,7 @@ def interpreter(data: Iterator[dict] = None, **kwargs) -> Tuple[Iterator[dict], 
     # применения двух разных аргументов одновременно.
     match kwargs:
         case {"file": str(file), **remain_actions}:
-            data = get_list_from_csv(file)
+            data = get_dict_from_csv(file)
             return data, remain_actions
         case {'where': str(condition), **remain_actions}:
             data = handle_filter(data, condition)
